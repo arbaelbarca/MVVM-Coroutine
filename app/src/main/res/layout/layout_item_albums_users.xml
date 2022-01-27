@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_margin="@dimen/_8sdp"
+    android:id="@+id/cvItemAlbumsUsers"
+    app:cardCornerRadius="@dimen/_6sdp"
+    app:cardElevation="@dimen/_6sdp">
+
+
+    <TextView
+        android:id="@+id/tvNameAlbumsUsers"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:padding="@dimen/_15sdp"
+        android:text="Name Album"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_12sdp" />
+
+
+</androidx.cardview.widget.CardView>
