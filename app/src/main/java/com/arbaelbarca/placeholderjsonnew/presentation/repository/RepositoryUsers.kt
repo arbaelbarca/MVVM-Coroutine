@@ -2,6 +2,7 @@ package com.arbaelbarca.placeholderjsonnew.presentation.repository
 
 import com.arbaelbarca.placeholderjsonnew.data.api.ApiService
 import com.arbaelbarca.placeholderjsonnew.presentation.model.ResponseAlbums
+import com.arbaelbarca.placeholderjsonnew.presentation.model.ResponseDetailUsers
 import com.arbaelbarca.placeholderjsonnew.presentation.model.ResponsePhotosAlbums
 import com.arbaelbarca.placeholderjsonnew.presentation.model.ResponseUsers
 import javax.inject.Inject
@@ -18,5 +19,9 @@ class RepositoryUsers @Inject constructor(val apiService: ApiService) {
 
     suspend fun callPhotosAlbums(id: String): List<ResponsePhotosAlbums.ResponsePhotosAlbumsItem> {
         return apiService.getPhotosAlbums(id)
+    }
+
+    suspend fun callDetailUsers(idUser: String): ResponseDetailUsers {
+        return apiService.getDetailUsers(idUser)
     }
 }

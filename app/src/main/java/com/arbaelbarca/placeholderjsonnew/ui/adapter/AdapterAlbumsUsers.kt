@@ -1,7 +1,6 @@
 package com.arbaelbarca.placeholderjsonnew.ui.adapter
 
 import android.view.View
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.arbaelbarca.placeholderjsonnew.R
 import com.arbaelbarca.placeholderjsonnew.presentation.model.ResponseAlbums
@@ -17,7 +16,7 @@ class AdapterAlbumsUsers(
     R.layout.layout_item_albums_users
 ) {
 
-    var selectPosition = 0
+//    var selectPosition = 0
 
     override fun getView(view: View?): View? {
         return view
@@ -29,36 +28,17 @@ class AdapterAlbumsUsers(
                 tvNameAlbumsUsers.text = listAlbumsUsers[position].title
 
                 setOnClickListener {
-                    selectPosition = position
+//                    selectPosition = position
                     onClickItem.clickItem(position, listAlbumsUsers[position])
-                    notifyDataSetChanged()
                 }
 
-                if (selectPosition == position) {
-                    cvItemAlbumsUsers.setCardBackgroundColor(
-                        ContextCompat.getColor(
-                            context, R.color.black
-                        )
-                    )
-
-                    tvNameAlbumsUsers.setTextColor(
-                        ContextCompat.getColor(
-                            context, R.color.white
-                        )
-                    )
-                } else {
-                    cvItemAlbumsUsers.setCardBackgroundColor(
-                        ContextCompat.getColor(
-                            context, R.color.white
-                        )
-                    )
-
-                    tvNameAlbumsUsers.setTextColor(
-                        ContextCompat.getColor(
-                            context, R.color.black
-                        )
-                    )
-                }
+//                if (selectPosition == position) {
+//                    cvItemAlbumsUsers.setColorBackground(context, R.color.black)
+//                    tvNameAlbumsUsers.setColorText(context, R.color.white)
+//                } else {
+//                    cvItemAlbumsUsers.setColorBackground(context, R.color.white)
+//                    tvNameAlbumsUsers.setColorText(context, R.color.black)
+//                }
             }
         }
     }

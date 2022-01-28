@@ -3,32 +3,31 @@ package com.arbaelbarca.placeholderjsonnew.ui.adapter
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.arbaelbarca.placeholderjsonnew.R
-import com.arbaelbarca.placeholderjsonnew.presentation.model.ResponsePhotosAlbums
+import com.arbaelbarca.placeholderjsonnew.presentation.model.ResponsePost
 import com.arbaelbarca.placeholderjsonnew.ui.listener.OnClickItem
 import com.arbaelbarca.placeholderjsonnew.utils.BaseGenericAdapter
-import com.arbaelbarca.placeholderjsonnew.utils.loadImageUrlPicasso
-import kotlinx.android.synthetic.main.layout_item_photos_albums.view.*
+import kotlinx.android.synthetic.main.layout_item_all_posts.view.*
 
-class AdapterPhotosAlbums(
-    val listPhotosAlbums: MutableList<ResponsePhotosAlbums.ResponsePhotosAlbumsItem>,
+class AdapterPosts(
+    val listPost: MutableList<ResponsePost.ResponsePostItem>,
     val onClickItem: OnClickItem
 ) : BaseGenericAdapter(
-    listPhotosAlbums.toMutableList(),
-    R.layout.layout_item_photos_albums
+    listPost.toMutableList(),
+    R.layout.layout_item_all_posts
 ) {
     override fun getView(view: View?): View? {
         return view
     }
 
     override fun onBindViewHold(position: Int, viewHolder: RecyclerView.ViewHolder, any: Any?) {
-        val photosItem = listPhotosAlbums[position]
+        val itemPosts = listPost[position]
         viewHolder.apply {
             itemView.apply {
-                imgItemPhotos.loadImageUrlPicasso(photosItem.thumbnailUrl!!)
-                tvItemTitlePhotos.text = photosItem.title
+                tvItemNamePosts.text = itemPosts.title
+                tvItemBodyPosts.text = itemPosts.body
 
                 setOnClickListener {
-                    onClickItem.clickItem(position, photosItem)
+                    onClickItem.clickItem(position, itemPosts)
                 }
             }
         }

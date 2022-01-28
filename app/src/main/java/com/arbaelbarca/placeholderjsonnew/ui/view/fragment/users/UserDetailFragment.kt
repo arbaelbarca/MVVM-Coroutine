@@ -1,22 +1,18 @@
 package com.arbaelbarca.placeholderjsonnew.ui.view.fragment.users
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.viewModels
-import com.arbaelbarca.placeholderjsonnew.R
+import androidx.fragment.app.Fragment
 import com.arbaelbarca.placeholderjsonnew.data.base.BaseFragmentBinding
 import com.arbaelbarca.placeholderjsonnew.databinding.FragmentUserDetailBinding
-import com.arbaelbarca.placeholderjsonnew.presentation.model.ResponseAlbums
-import com.arbaelbarca.placeholderjsonnew.presentation.model.ResponsePhotosAlbums
 import com.arbaelbarca.placeholderjsonnew.presentation.model.ResponseUsers
-import com.arbaelbarca.placeholderjsonnew.presentation.viewmodel.ViewModelUsers
-import com.arbaelbarca.placeholderjsonnew.ui.adapter.AdapterAlbumsUsers
-import com.arbaelbarca.placeholderjsonnew.ui.adapter.AdapterPhotosAlbums
-import com.arbaelbarca.placeholderjsonnew.ui.listener.OnClickItem
-import com.arbaelbarca.placeholderjsonnew.utils.*
+import com.arbaelbarca.placeholderjsonnew.ui.adapter.AdapterViewPager2
+import com.arbaelbarca.placeholderjsonnew.ui.listener.OnFragmentViewPager
+import com.arbaelbarca.placeholderjsonnew.ui.view.fragment.albums.AlbumsFragment
+import com.arbaelbarca.placeholderjsonnew.ui.view.fragment.posting.PostingFragment
+import com.arbaelbarca.placeholderjsonnew.utils.ConstVar
+import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 
 // TODO: Rename parameter arguments, choose names that match
@@ -31,11 +27,12 @@ private const val ARG_PARAM2 = "param2"
  */
 @AndroidEntryPoint
 class UserDetailFragment : BaseFragmentBinding<FragmentUserDetailBinding>() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    val viewmodelUsers: ViewModelUsers by viewModels()
+    val arrayTab = arrayOf(
+        "Albums List",
+        "Posts List"
+    )
+
     lateinit var detailBinding: FragmentUserDetailBinding
     var bundle: Bundle? = null
     var responseUsersItem: ResponseUsers.ResponseUsersItem? = null
@@ -68,8 +65,27 @@ class UserDetailFragment : BaseFragmentBinding<FragmentUserDetailBinding>() {
     private fun initial() {
         initBundle()
         initGetData()
-        initCallApi()
-        initObserver()
+        initViewPager()
+    }
+
+    private fun initViewPager() {
+        val adapter = AdapterViewPager2(
+            childFragmentManager,
+            lifecycle, object : OnFragmentViewPager {
+                override fun setFragmentViewPager(pos: Int): Fragment {
+                    when (pos) {
+                        0 -> return AlbumsFragment(responseUsersItem!!)
+                        1 -> return PostingFragment()
+                        else -> return AlbumsFragment(responseUsersItem!!)
+                    }
+                }
+
+            })
+        detailBinding.viewPager2.adapter = adapter
+
+        TabLayoutMediator(detailBinding.tabLayout, detailBinding.viewPager2) { tab, position ->
+            tab.text = arrayTab[position]
+        }.attach()
     }
 
     private fun initBundle() {
@@ -87,73 +103,6 @@ class UserDetailFragment : BaseFragmentBinding<FragmentUserDetailBinding>() {
             detailBinding.tvAddressDetailUsers.text = responseUsersItem?.address?.street + ", " +
                     responseUsersItem?.address?.city
         }
-    }
-
-    private fun initObserver() {
-        viewmodelUsers.observerGetAlbumsUsers()
-            .observe(viewLifecycleOwner, {
-                when (it) {
-                    is UiState.Loading -> {
-
-                    }
-                    is UiState.Success -> {
-                        val dataItem = it.data
-                        initAdapter(dataItem)
-                    }
-                    is UiState.Failure -> {
-                        it.throwable.printStackTrace()
-                    }
-                }
-            })
-
-        viewmodelUsers.observerGetPhotosAlbums()
-            .observe(viewLifecycleOwner, {
-                when (it) {
-                    is UiState.Loading -> {
-                        showView(detailBinding.pbList)
-                        hideView(detailBinding.rvListPhotosAlbums)
-                    }
-                    is UiState.Success -> {
-                        hideView(detailBinding.pbList)
-                        showView(detailBinding.rvListPhotosAlbums)
-                        val dataItem = it.data
-                        initAdapterPhotos(dataItem)
-                    }
-                    is UiState.Failure -> {
-                        hideView(detailBinding.pbList)
-                        showView(detailBinding.rvListPhotosAlbums)
-                        it.throwable.printStackTrace()
-                    }
-                }
-            })
-    }
-
-    private fun initAdapterPhotos(dataItem: List<ResponsePhotosAlbums.ResponsePhotosAlbumsItem>) {
-        val adapterPhotosAlbums =
-            AdapterPhotosAlbums(dataItem as MutableList<ResponsePhotosAlbums.ResponsePhotosAlbumsItem>)
-        setRvAdapterVertikalDefault(detailBinding.rvListPhotosAlbums, adapterPhotosAlbums)
-    }
-
-    private fun initAdapter(dataItem: List<ResponseAlbums.ResponseAlbumsItem>) {
-        val adapterAlbumsUsers =
-            AdapterAlbumsUsers(dataItem as MutableList<ResponseAlbums.ResponseAlbumsItem>,
-                object : OnClickItem {
-                    override fun clickItem(pos: Int, any: Any) {
-                        val albumsItem = any as ResponseAlbums.ResponseAlbumsItem
-                        callApiPhotos(albumsItem.id!!)
-                    }
-
-                })
-        setRvAdapterHorizontalDefault(detailBinding.rvListAlbumDetailUsers, adapterAlbumsUsers)
-    }
-
-    private fun callApiPhotos(albumsItemId: Int) {
-        viewmodelUsers.getPhotosAlbums(albumsItemId.toString())
-    }
-
-    private fun initCallApi() {
-        viewmodelUsers.getAlbumsUsers(responseUsersItem?.id.toString())
-        callApiPhotos(1)
     }
 
 

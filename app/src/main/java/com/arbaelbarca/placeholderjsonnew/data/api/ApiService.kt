@@ -1,8 +1,6 @@
 package com.arbaelbarca.placeholderjsonnew.data.api
 
-import com.arbaelbarca.placeholderjsonnew.presentation.model.ResponseAlbums
-import com.arbaelbarca.placeholderjsonnew.presentation.model.ResponsePhotosAlbums
-import com.arbaelbarca.placeholderjsonnew.presentation.model.ResponseUsers
+import com.arbaelbarca.placeholderjsonnew.presentation.model.*
 import retrofit2.http.GET
 import retrofit2.http.Path
 
@@ -22,4 +20,22 @@ interface ApiService {
     suspend fun getPhotosAlbums(
         @Path("id_albums") idAlbums: String
     ): List<ResponsePhotosAlbums.ResponsePhotosAlbumsItem>
+
+
+    @GET("posts")
+    suspend fun getAllPost(
+
+    ): List<ResponsePost.ResponsePostItem>
+
+    @GET("users/{iduser}")
+    suspend fun getDetailUsers(
+        @Path("iduser") iduser: String
+    ): ResponseDetailUsers
+
+    @GET("posts/{id}/comments")
+    suspend fun getAllComments(
+        @Path("id") id: String
+    ): List<ResponseComments.ResponseCommentsItem>
+
+
 }

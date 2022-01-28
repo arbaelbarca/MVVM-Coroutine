@@ -71,7 +71,7 @@ class UserFragment : BaseFragmentBinding<FragmentHomeBinding>() {
 
     private fun initObserver() {
         viewmodelUsers.observerGetUsers()
-            .observe(viewLifecycleOwner, {
+            .observe(viewLifecycleOwner) {
                 when (it) {
                     is UiState.Loading -> {
                         showView(homeBinding.pbList)
@@ -85,7 +85,7 @@ class UserFragment : BaseFragmentBinding<FragmentHomeBinding>() {
                         hideView(homeBinding.pbList)
                     }
                 }
-            })
+            }
     }
 
     private fun initAdapter(dataItem: List<ResponseUsers.ResponseUsersItem>) {

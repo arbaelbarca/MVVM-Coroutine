@@ -4,10 +4,17 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/data arba new/As project/PlaceHolderJsonNew/app/src/main/res/layout/activity_frame_layout.xml" value="0.18177083333333333" />
-        <entry key="..\:/data arba new/As project/PlaceHolderJsonNew/app/src/main/res/layout/activity_main.xml" value="0.24895833333333334" />
+        <entry key="..\:/data arba new/As project/PlaceHolderJsonNew/app/src/main/res/layout/activity_main.xml" value="0.19" />
+        <entry key="..\:/data arba new/As project/PlaceHolderJsonNew/app/src/main/res/layout/fragment_albums.xml" value="0.1707193515704154" />
+        <entry key="..\:/data arba new/As project/PlaceHolderJsonNew/app/src/main/res/layout/fragment_albums_detail.xml" value="0.1707193515704154" />
         <entry key="..\:/data arba new/As project/PlaceHolderJsonNew/app/src/main/res/layout/fragment_home.xml" value="0.19583333333333333" />
-        <entry key="..\:/data arba new/As project/PlaceHolderJsonNew/app/src/main/res/layout/fragment_user_detail.xml" value="0.2957427536231884" />
-        <entry key="..\:/data arba new/As project/PlaceHolderJsonNew/app/src/main/res/layout/layout_item_albums_users.xml" value="0.2957427536231884" />
+        <entry key="..\:/data arba new/As project/PlaceHolderJsonNew/app/src/main/res/layout/fragment_posting.xml" value="0.17831813576494426" />
+        <entry key="..\:/data arba new/As project/PlaceHolderJsonNew/app/src/main/res/layout/fragment_posts_detail.xml" value="0.25" />
+        <entry key="..\:/data arba new/As project/PlaceHolderJsonNew/app/src/main/res/layout/fragment_user_detail.xml" value="0.25" />
+        <entry key="..\:/data arba new/As project/PlaceHolderJsonNew/app/src/main/res/layout/fragment_user_detail_photo.xml" value="0.16084093211752787" />
+        <entry key="..\:/data arba new/As project/PlaceHolderJsonNew/app/src/main/res/layout/layout_item_albums_users.xml" value="0.18" />
+        <entry key="..\:/data arba new/As project/PlaceHolderJsonNew/app/src/main/res/layout/layout_item_all_posts.xml" value="0.17831813576494426" />
+        <entry key="..\:/data arba new/As project/PlaceHolderJsonNew/app/src/main/res/layout/layout_item_comments.xml" value="0.17831813576494426" />
         <entry key="..\:/data arba new/As project/PlaceHolderJsonNew/app/src/main/res/layout/layout_item_photos_albums.xml" value="0.2957427536231884" />
         <entry key="..\:/data arba new/As project/PlaceHolderJsonNew/app/src/main/res/layout/layout_item_users.xml" value="0.19583333333333333" />
       </map>
